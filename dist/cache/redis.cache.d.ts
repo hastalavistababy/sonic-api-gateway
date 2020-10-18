@@ -1,5 +1,6 @@
+import Redis from 'ioredis';
 export declare class RedisModule {
-    redis: any;
+    redis: Redis.Redis;
     constructor(clientOpts?: any);
     connect(): Promise<void>;
     get(key: any): Promise<string>;

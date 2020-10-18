@@ -30,7 +30,8 @@ export class ApiGateway {
     this.config = Object.assign(
       {
         middlewares: [],
-        version: '1.0'
+        version: '1.0',
+        cache: []
       },
       config
     );

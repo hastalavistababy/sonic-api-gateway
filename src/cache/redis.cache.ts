@@ -1,22 +1,22 @@
 import { Debug } from '../debug';
 import Redis from 'ioredis';
 
-const redis = new Redis()
+
 
 export class RedisModule {
-    redis: any
+    redis = new Redis()
 
     constructor(clientOpts?: any) {
         this.redis = new Redis(clientOpts)
     }
 
     async connect() {
-        Debug(`\n⚡️[CACHE]: Redis server is running at ${redis.options.host}:${redis.options.port}`.magenta.underline)
+        Debug(`\n⚡️[CACHE]: Redis server is running at ${this.redis.options.host}:${this.redis.options.port}`.magenta.underline)
         // redis.connect(() => Logger(`\n⚡️[CACHE]: Redis server is running at ${redis.options.host}:${redis.options.port}`.magenta.underline))
     }
 
     async get(key: any) {
-        const result = await redis.get(key)
+        const result = await this.redis.get(key)
 
         return result;
     }
@@ -24,16 +24,16 @@ export class RedisModule {
     async set(key: any, data: any, ex?: number) {
         let result
         if (ex) {
-            result = await redis.setex(key, ex, data)
+            result = await this.redis.setex(key, ex, data)
         }
         else {
-            result = await redis.set(key, data)
+            result = await this.redis.set(key, data)
         }
 
         return result;
     }
 
     async del(key: any) {
-        await redis.del(key)
+        await this.redis.del(key)
     }
 }

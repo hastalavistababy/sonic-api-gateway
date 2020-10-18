@@ -71,7 +71,8 @@ var ApiGateway = /** @class */ (function () {
         process.env.debug = (config.debug || lodash_1.default.isUndefined(config.debug) ? 'logging' : '');
         this.config = Object.assign({
             middlewares: [],
-            version: '1.0'
+            version: '1.0',
+            cache: []
         }, config);
         this.cache = new cache_module_1.Cache(this.config);
         middlewares_1.ApiGatewayMiddleware(app, this.config);

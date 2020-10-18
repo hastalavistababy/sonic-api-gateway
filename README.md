@@ -1,7 +1,6 @@
 # Sonic - Simple Nodejs API GATEWAY
-___
 
-[logo]: https://a.radikal.ru/a09/2009/6d/28123cd565be.png "Api Gateway"
+![alt text](https://iili.io/3lSIiF.png "Sonic api gateway")
 
 Sonic is a high-performance 100% open source, config based free API Gateway for Nodejs.All source code is available under the MIT License on GitHub.
 

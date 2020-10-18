@@ -42,15 +42,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RedisModule = void 0;
 var debug_1 = require("../debug");
 var ioredis_1 = __importDefault(require("ioredis"));
-var redis = new ioredis_1.default();
 var RedisModule = /** @class */ (function () {
     function RedisModule(clientOpts) {
+        this.redis = new ioredis_1.default();
         this.redis = new ioredis_1.default(clientOpts);
     }
     RedisModule.prototype.connect = function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                debug_1.Debug(("\n\u26A1\uFE0F[CACHE]: Redis server is running at " + redis.options.host + ":" + redis.options.port).magenta.underline);
+                debug_1.Debug(("\n\u26A1\uFE0F[CACHE]: Redis server is running at " + this.redis.options.host + ":" + this.redis.options.port).magenta.underline);
                 return [2 /*return*/];
             });
         });
@@ -60,7 +60,7 @@ var RedisModule = /** @class */ (function () {
             var result;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, redis.get(key)];
+                    case 0: return [4 /*yield*/, this.redis.get(key)];
                     case 1:
                         result = _a.sent();
                         return [2 /*return*/, result];
@@ -75,11 +75,11 @@ var RedisModule = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         if (!ex) return [3 /*break*/, 2];
-                        return [4 /*yield*/, redis.setex(key, ex, data)];
+                        return [4 /*yield*/, this.redis.setex(key, ex, data)];
                     case 1:
                         result = _a.sent();
                         return [3 /*break*/, 4];
-                    case 2: return [4 /*yield*/, redis.set(key, data)];
+                    case 2: return [4 /*yield*/, this.redis.set(key, data)];
                     case 3:
                         result = _a.sent();
                         _a.label = 4;
@@ -92,7 +92,7 @@ var RedisModule = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, redis.del(key)];
+                    case 0: return [4 /*yield*/, this.redis.del(key)];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
