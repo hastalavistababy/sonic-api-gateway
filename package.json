@@ -2,15 +2,27 @@
   "name": "sonic-api-gateway",
   "version": "1.0.0",
   "description": "Nodejs api gateway",
-  "main": "dist/api-gateway",
-  "repository": "https://gitlab.com/myprojectslist/api-gateway.git",
+  "main": "dist/index.js",
+  "repository": "https://github.com/Hastalavistababy/sonic-api-gateway.git",
   "author": "Mogeli Lortkipanidze <lortkipanidzemogeli@gmail.com>",
   "license": "MIT",
+  "publishConfig": { 
+    "registry": "https://npm.pkg.github.com/" 
+  },
+  "keywords": [
+    "api-gateway",
+    "express",
+    "axios",
+    "node-api-gateway",
+    "sonic-gateway",
+    "sonic",
+    "sonic-api-gateway"
+  ],
   "scripts": {
     "start:dev": "nodemon",
     "start:build": "npm audit && rm -rf dist && tsc"
   },
-  "dependencies": {
+  "depdencies": {
     "axios": "^0.20.0",
     "express": "^4.17.1",
     "express-fileupload": "^1.1.10",
