@@ -60,7 +60,7 @@ Node.js 0.10 or higher is required.
 npm install NodeWay
 ```
 
-## Configuration options explained
+## Configuration options
 ```js
 {
     version: String, // Optional
@@ -84,18 +84,29 @@ npm install NodeWay
                 driver: String, // Required, redis | memory,
                 ttl: Number, // Optional, 1 = 1 second
             },
-            onResponse: Function, // Optional
+            params : { // Optional
+                [key: String] : String
+            },
+            onResponse?(req: any, res: any, next: any, data: any, route: any): Function; // Optional
+            onRequest?(req: any, res: any, next: any): Function; // Optional
             backend: [
                 {
                     target: String, // Required, ex: "https://jsonplaceholder.typicode.com/posts"
                     method: String, // Required, GET, POST, DELETE, PUT
                     response_key: String, // Optional
                     response_status : Number, // Optional
-                    onResponse: Function, // Optional
+                    onResponse?(req: any, res: any, next: any, data: any, route: any): Function, // Optional
                     auth : Boolean, // Optional
-                    body: Object, // Required if request method is POST, PUT. ex: body : {test : String}
+                    onError?(req, res, next, proxyRoute, error) : Function // Optional
+                    params : { // Optional
+                        [key: String] : String
+                    },
+                    body: {
+                        [key: string]: 'string' | 'files' | 'any' | 'number' | 'boolean' 
+                    }, // Required if request method is POST, PUT. ex: body : {name : 'string'}
                     body_method: String, // Default : rawdata. Possible: formdata, urlencoded, raw
                     headers: Object // Optional, set request header
+                    childRoutes: Backend[] // Experimental
                 }
             ]
         }
