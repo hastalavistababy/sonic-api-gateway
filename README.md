@@ -57,7 +57,7 @@ Node.js 0.10 or higher is required.
 
 
 ```bash
-npm install NodeWay
+npm install sonic-api-gateway
 ```
 
 ## Configuration options
