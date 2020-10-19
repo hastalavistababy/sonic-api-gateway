@@ -2,7 +2,7 @@
 
 ![alt text](https://iili.io/3lSIiF.png "Sonic api gateway")
 
-Sonic is a high-performance 100% open source, config based free API Gateway for Nodejs.All source code is available under the MIT License on GitHub.
+Sonic is a high-performance 100% open source, config based free API Gateway for Nodejs. All source code is available under the MIT License on GitHub.
 
 Its core functionality is to create an API that acts as an aggregator of many microservices into single endpoints.
 
@@ -43,13 +43,13 @@ Sonic({
   * Multi Caching(redis, memory).
   * Simple JSON configuration.
   * Secure the transport.
-  * Error handling
+  * Error handling.
   * Request body validation
   * Use middlewares.
 
 ## Installation
 
-This is a [Node.js](https://nodejs.org/en/) module available through the [npm registry](https://www.npmjs.com/).
+This is a [Node.js](https://nodejs.org/en/) module available through the [npm registry](https://www.npmjs.com/package/sonic-api-gateway).
 
 Before installing, [download and install Node.js](https://nodejs.org/en/download/).
 Node.js 0.10 or higher is required.
