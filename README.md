@@ -1,4 +1,4 @@
-# Sonic - Simple Nodejs API GATEWAY
+# Sonic - Nodejs API GATEWAY
 
 ![alt text](https://iili.io/3lSIiF.png "Sonic api gateway")
 
@@ -9,7 +9,7 @@ Its core functionality is to create an API that acts as an aggregator of many mi
 ### Usage: 
 
 ```js
-import Sonic from 'api-gateway';
+import Sonic from 'sonic-api-gateway';
 
 Sonic({
   port : 3014,
@@ -114,4 +114,4 @@ npm install sonic-api-gateway
 }
 ```
 
-Dcoumentation in progress.
+Documentation in progress.
