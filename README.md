@@ -9,9 +9,9 @@ Its core functionality is to create an API that acts as an aggregator of many mi
 ### Usage: 
 
 ```js
-import Sonic from 'sonic-api-gateway';
+import { Sonic, SonicConfigInterface } from 'sonic-api-gateway';
 
-Sonic({
+const Config: SonicConfigInterface = {
   port : 3014,
   routes: [
     {
@@ -33,7 +33,9 @@ Sonic({
     },
     // ...
   ]
-});
+}
+
+Sonic(Config);
 ```
 
 ## Features
