@@ -8,7 +8,7 @@ const Config: SonicConfigInterface = {
     logs: true,
     cache: [
         {
-            driver: "redis",
+            driver: "memory",
         }
     ],
     routes: [
@@ -61,7 +61,7 @@ const Config: SonicConfigInterface = {
             endpoint: "/v1/test/pets/bystatys/:status",
             method: "get",
             cache: {
-                driver: "redis",
+                driver: "memory",
             },
             backend: [
                 {
@@ -133,7 +133,7 @@ const Config: SonicConfigInterface = {
             endpoint: "/v1/test/store/order/:id",
             method: "get",
             cache: {
-                driver: "redis",
+                driver: "memory",
             },
             backend: [
                 {
