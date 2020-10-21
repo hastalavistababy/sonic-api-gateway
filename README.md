@@ -1,4 +1,4 @@
-# Sonic - Nodejs API GATEWAY
+# Sonic - Nodejs API GATEWAY 
 
 ![alt text](https://iili.io/3lSIiF.png "Sonic api gateway")
 
@@ -6,16 +6,49 @@ Sonic is a high-performance 100% open source, config based free API Gateway for 
 
 Its core functionality is to create an API that acts as an aggregator of many microservices into single endpoints.
 
-### Usage: 
+
+## Features
+  * A single API that exposes many.
+  * Merge the content and modify of several APIs into one.
+  * Device detection (mobile, desktop).
+  * HTTP Caching(Redis, memory).
+  * Unlimited endpoints and backends.
+  * Secure the transport.
+  * Error handling.
+  * URL patterns and variables
+  * Request body validation
+  * Use middlewares(Response, Request, Error, and your own).
+  * Simple JSON configuration.
+
+### Installing: 
+This is a [Node.js](https://nodejs.org/en/) module available through the [npm registry](https://www.npmjs.com/package/sonic-api-gateway).
+
+Using npm:
+
+```bash
+$ npm install sonic-api-gateway --save
+```
+Using yarn:
+
+```bash
+$ yarn add sonic-api-gateway
+```
+
+### Example: 
+Now that we have installed the Sonic API gateway module. 
+
+Let's create a Sonic project file.
+
+___app.js___
 
 ```js
-import { Sonic, SonicConfigInterface } from 'sonic-api-gateway';
+const Sonic = require('sonic-api-gateway').Sonic
 
-const Config: SonicConfigInterface = {
-  port : 3014,
+const Config = {
+  port : 3014, // Server will run on port 3014 
   routes: [
     {
-        endpoint: '/user:id',
+        endpoint: '/posts/:id', // http://localhost:3014/user/:id
         method: 'get',
         backend: [
             {
@@ -35,33 +68,21 @@ const Config: SonicConfigInterface = {
   ]
 }
 
-Sonic(Config);
+new Sonic(Config);
 ```
 
-## Features
-  * A single API that exposes many.
-  * Merge the content and modify of several APIs into one.
-  * Device detection (mobile, desktop).
-  * Multi Caching(redis, memory).
-  * Simple JSON configuration.
-  * Secure the transport.
-  * Error handling.
-  * Request body validation
-  * Use middlewares.
+Start Sonic server:
 
-## Installation
-
-This is a [Node.js](https://nodejs.org/en/) module available through the [npm registry](https://www.npmjs.com/package/sonic-api-gateway).
-
-Before installing, [download and install Node.js](https://nodejs.org/en/download/).
-Node.js 0.10 or higher is required.
-
-
-```bash
-npm install sonic-api-gateway
+```js
+ node app.js 
 ```
 
-## Configuration options
+Make a GET request (as we declare in config) with CURL:
+
+```curl -G http://localhost:3014/user/1```
+
+
+## Configuration options:
 ```js
 {
     version: String, // Optional

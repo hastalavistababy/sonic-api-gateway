@@ -1,17 +1,16 @@
-
 # API
 ---
 ### Options: 
-1. [```PORT``` - Creates NodeWay server](#PORT)
-2. [```VERSION``` - Informing client for NodeWay version](version)
-3. [```DEBUG``` - NodeWay debug mode](#debug)
-4. [```LOGS``` - Log incoming request info](#logs)
-5. [```MIDDLEWARES``` - Express application middlewares](#middlewares)
+1. [```PORT``` - Creates Sonic server](#PORT)
+2. [```VERSION``` - Informing client about Sonic version](version)
+3. [```DEBUG``` - Sonic debug mode](#debug)
+4. [```LOGS``` - Log incoming requests info](#logs)
+5. [```MIDDLEWARES``` - Middlewares](#middlewares)
 6. [```CACHE``` - Caching responses](#cache)
 7. [```ROUTES``` - API routes](#routes)
-8. [```ROUTES.ENDPOINT``` - Api endpoint name](#routes.endpoint)
+8. [```ROUTES.ENDPOINT``` - Api endpoint](#routes.endpoint)
 9. [```ROUTES.METHOD``` - Api request method](#routes.method)
-10. [```ROUTES.onResponse``` - ](#routes.onresponse)
+10. [```ROUTES.onResponse``` - Response ](#routes.onresponse)
 11. [```ROUTES.CACHE``` - ](#routes.cache)
 12. [```ROUTES.BACKEND``` - API routes backend services](#routes.baackend)
 13. [```ROUTES.BACKEND.TARGET``` - ](#routes.backend.target)
