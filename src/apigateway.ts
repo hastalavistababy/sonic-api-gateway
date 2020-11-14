@@ -2,7 +2,7 @@ import express, { Response, Request, NextFunction, Application } from 'express';
 import _ from 'lodash';
 import { URLSearchParams } from 'url';
 import FormData from 'form-data';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import crypto from 'crypto';
 import { ErrorResponse } from './error.handlers';
 import {
@@ -61,9 +61,9 @@ export class ApiGateway {
         this.setParams(req, res, route)
 
         if ('cache' in route) {
-          const cacheRes = await this.cache.get(route.cache.driver, this.CacheKey(req));
-          if (cacheRes) {
-            res.send(JSON.parse(cacheRes))
+          const responseFromCache = await this.cache.get(route.cache.driver, this.CacheKey(req));
+          if (responseFromCache) {
+            res.send(JSON.parse(responseFromCache));
             return;
           }
         }
@@ -80,7 +80,7 @@ export class ApiGateway {
             // attach on response callback
             data = await this.attachResponse(req, res, next, data, proxyRoute);
 
-            // Check response
+            // Check response status
             data = await this.checkStatusCode(proxyRoute, response, data);
 
             // Attach response key
@@ -161,7 +161,7 @@ export class ApiGateway {
     // if (typeof parentResponse == 'object') proxyRoute.parent_response = parentResponse;
     res.set(`sonic`, this.config.version);
 
-    let requestOptions: any = this.requestOptions(proxyRoute, req, res);
+    let requestOptions: AxiosRequestConfig = this.requestOptions(proxyRoute, req, res);
 
     if (res.writableEnded) return {};
 
@@ -175,6 +175,7 @@ export class ApiGateway {
 
     let response: void | AxiosResponse = await axios(requestOptions)
       .catch((err: AxiosError) => {
+        console.log(err)
         if (this.config.logs) BadResponseLog(req, { target: proxyRoute.target, content: err })
 
         this.attachErrorResponse(res, req, next, err, proxyRoute)

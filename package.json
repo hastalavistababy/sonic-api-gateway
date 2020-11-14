@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "start:dev": "nodemon",
-    "start:example:petstore" : "nodemon --watch 'examples/**/*.ts' --exec 'ts-node' examples/petstore/app.ts",
+    "start:example:petstore": "nodemon --watch '*/**/*.ts' --exec 'ts-node' examples/petstore/app.ts",
     "start:build": "npm audit && rm -rf dist && tsc"
   },
   "dependencies": {

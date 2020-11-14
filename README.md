@@ -146,10 +146,10 @@ Make a GET request (as we declare in config) with CURL:
 4. [```LOGS``` - Log incoming requests info](#logs)
 5. [```MIDDLEWARES``` - Middlewares](#middlewares)
 6. [```CACHE``` - Caching responses](#cache)
-7. [```ROUTES``` ](#routes)
-8. [```ROUTES.ENDPOINT```](#routes.endpoint)
-9. [```ROUTES.METHOD```](#routes.method)
-10. [```ROUTES.onResponse```](#routes.onresponse)
+7. [```ROUTES``` - API](#routes)
+8. [```ROUTES.ENDPOINT``` - API endpoint](#routes.endpoint)
+9. [```ROUTES.METHOD``` API method](#routes.method)
+10. [```ROUTES.onResponse``` - Handle response](#routes.onresponse)
 11. [```ROUTES.CACHE```](#routes.cache)
 12. [```ROUTES.BACKEND```](#routes.baackend)
 13. [```ROUTES.BACKEND.TARGET```](#routes.backend.target)
@@ -301,5 +301,74 @@ new Sonic({
     // ...
 })
 ```
+### ```routes``` - API routes
+An array of endpoint objects offered by the gateway, all the associated backends and configurations.
+
+**Type:** *Array:Object*
+**Default:** *none*
+**Required:** *true*
+
+**Example:**
+```
+new Sonic({
+    routes : [
+        {
+            endpoint: "/v1/test",
+            method: "get", 
+            backend: [
+                // ...
+            ]
+        },
+        // ...
+    ]
+    // ...
+})
+```
+
+### ```routes.endpoint``` - Api endpoint name
+The resource URL you want to expose
+
+**Type:** *String*
+**Default:** *none*
+**Required:** *true*
+**Note:** *Endpoints starts with "/"*
+
+**Example**
+```
+new Sonic({
+    // ... 
+    routes : {
+        endpoint : "/v1/test-endpoint"
+        // ... 
+    }
+    // ... 
+})
+```
+
+    curl http://localhost:3014/v1/test-endpoint
+
+### ```routes.method``` - Api request method
+Request method, GET, POST, PUT or DELETE
+
+**Type:** *String*
+**Default:** *get*
+**Required:** *true*
+**Note:** *Possible : GET, POST, PUT, DELETE*
+
+
+**Example**
+```
+new Sonic({
+    // ...
+    routes : {
+        endpoint : "/v1/test-endpoint",
+        method : "get"
+        // ...
+    }
+    // ...
+})
+```
+
+    curl http://localhost:1001/v1/test-endpoint
 
 Documentation in progress.
