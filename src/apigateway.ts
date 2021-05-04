@@ -24,6 +24,8 @@ export class ApiGateway {
   private cache: any;
 
   constructor(config: ApiGatewayConfigInterface) {
+    console.log(config);
+    
     ValidateConfig(config)
     this.routes = config.routes;
     process.env.debug = (config.debug || _.isUndefined(config.debug) ? 'logging' : '')
@@ -55,8 +57,8 @@ export class ApiGateway {
 
       // Generate express routes
       app[routeConfig.method](routeConfig.endpoint, async (req: Request, res: Response, next: NextFunction) => {
-        let log: string = `[${req.method.toUpperCase()}] ${req.hostname}${req.url} - date: ${new Date().toISOString()}, IP: ${req.ip}`
-        Debug(log.green.italic)
+        let logText: string = `[${req.method.toUpperCase()}] ${req.hostname}${req.url} - date: ${new Date().toISOString()}, IP: ${req.ip}`
+        Debug(logText.green.italic)
 
         this.setParams(req, res, route)
 
@@ -168,14 +170,17 @@ export class ApiGateway {
     const errorResponse = (reason: {}) => {
       return new ErrorResponse({
         message: 'BAD RESPONSE',
-        target: proxyRoute.target,
+        // target: proxyRoute.target,
         reason: reason,
       }, res)
     }
 
+    console.log(requestOptions);
+    
+
     let response: void | AxiosResponse = await axios(requestOptions)
       .catch((err: AxiosError) => {
-        console.log(err)
+        console.log(err.response.data)
         if (this.config.logs) BadResponseLog(req, { target: proxyRoute.target, content: err })
 
         this.attachErrorResponse(res, req, next, err, proxyRoute)
@@ -247,8 +252,8 @@ export class ApiGateway {
     const errorResponse = (message: string) => {
       return new ErrorResponse(
         {
-          message: 'BAD ROUTE BACKEND',
-          target: proxyRoute.target,
+          message: 'BAD BODY',
+          // target: this.config.debug ? proxyRoute.target : '',
           reason: `${message}`,
         },
         res
@@ -267,20 +272,20 @@ export class ApiGateway {
           proxyObjects.map((item: any) => {
             let bodyItemType = proxyRoute.body[item];
 
-            if (bodyItemType != 'any' && bodyItemType != 'files') {
-              if (req.body[item] === false) errorResponse('Invalid request body [NOT FOUND]')
-              if (typeof req.body[item] != bodyItemType && proxyRoute.body_method != 'urlencoded') {
-                errorResponse('Invalid Request Body [TYPE ERROR]')
+            if (bodyItemType !== 'any' && bodyItemType !== 'files') {
+              !req.body[item] && errorResponse(`MISSING ${proxyObjects}`)
+
+              if (typeof req.body[item] !== bodyItemType && proxyRoute.body_method !== 'urlencoded') {
+                errorResponse(`Invalid body. '${proxyObjects}' 😧; ${item} must be ${bodyItemType}`)
               }
             }
 
-            if (bodyItemType == 'files') {
+            if (bodyItemType === 'files') {
               if (req.files == null || _.isUndefined(req.files[item])) {
-                errorResponse('Invalid request body [NOT FOUND]/File not found')
+                errorResponse('MISSING [NOT FOUND]/File not found')
               }
             }
           })
-
 
           // Form data
           if (proxyRoute.body_method == 'formdata') {
