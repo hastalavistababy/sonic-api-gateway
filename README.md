@@ -48,7 +48,7 @@ const Config = {
   port : 3014, // Server will run on port 3014 
   routes: [
     {
-        endpoint: '/posts/:id', // http://localhost:3014/user/:id
+        endpoint: '/posts/:id', // http://localhost:3014/posts/:id
         method: 'get',
         backend: [
             {
@@ -79,7 +79,7 @@ Start Sonic server:
 
 Make a GET request (as we declare in config) with CURL:
 
-```curl -G http://localhost:3014/user/1```
+```curl -G http://localhost:3014/posts/1```
 
 
 ## Configuration options:
